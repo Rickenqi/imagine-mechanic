@@ -1,0 +1,20 @@
+html, body, #app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.el-table .warning-row {
+  background-color: oldlace;
+}
+.el-table .success-row {
+  background-color: #bbe6d6;
+}
+.box-card-1 {
+  margin: 50px;
+}
+.box-card-2 {
+  margin: 50px;
+}
+.sub-title {
+  color: silver;
+}
