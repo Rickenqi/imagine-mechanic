@@ -8,16 +8,16 @@
       <h2 class="box-title">零件详情</h2>
       <!-- 搜索功能 -->
       <span>
-        零件号：
-        <el-input placeholder="请输入内容" v-model="queryInfo.carpartId"></el-input>
+        技师号：
+        <el-input placeholder="请输入内容" v-model="queryInfo.mechanicId"></el-input>
       </span>
       <span>
-        零件名：
-        <el-input placeholder="请输入内容" v-model="queryInfo.carpartName"></el-input>
+        姓名：
+        <el-input placeholder="请输入内容" v-model="queryInfo.mechanicName"></el-input>
       </span>
       <span>
-        生产厂家：
-        <el-input placeholder="请输入内容" v-model="queryInfo.manufacturer"></el-input>
+        资历：
+        <el-input placeholder="请输入内容" v-model="queryInfo.mechanicLv"></el-input>
       </span>
       <el-button icon="el-icon-search" @click="getData()"></el-button>
       <!-- 表格 -->
@@ -25,24 +25,24 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column prop="carpartId" label="零件号">
           <template slot-scope="scope">
-            <a :href="'/carpart/'+scope.row.carpartId">{{scope.row.carpartId}}</a>
+            <a :href="'/worker/list/'+scope.row.mechanicId">{{scope.row.mechanicId}}</a>
           </template>
         </el-table-column>
-        <el-table-column prop="carpart_name" label="零件名称"></el-table-column>
-        <el-table-column prop="manu" label="生产厂家"></el-table-column>
-        <el-table-column prop="carpart_price" label="零件价格"></el-table-column>
-        <el-table-column prop="reserve_amount" label="零件数量"></el-table-column>
-      </el-table>
+        <el-table-column prop="mechanicId" label="职工号"></el-table-column>
+        <el-table-column prop="mechanicName" label="职工姓名"></el-table-column>
+        <el-table-column prop="mechanicLv" label="职工资历"></el-table-column>
+        <el-table-column prop="mechanicPhone" label="职工手机号"></el-table-column>
       <!-- 分页 -->
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="queryInfo.pageNum"
+        :current-page="queryInfo.pagenum"
         :page-sizes="[10, 20, 50]"
-        :page-size="queryInfo.pageSize"
+        :page-size="queryInfo.pagesize"
         layout="total, sizes, prev, pager, next"
         :total="total"
       ></el-pagination>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -52,11 +52,10 @@ export default {
   data() {
     return {
       queryInfo: {
-        carpartId: '',
-        carpartName: '',
-        manufacturer: '',
-        carpartPrice: '',
-        reserveAmount: '',
+        mechanicId: '',
+        mechanicName: '',
+        mechanicLv: '',
+        mechanicPhone: '',
         pageNum: 1,
         pageSize: 20
       },
@@ -73,7 +72,7 @@ export default {
     },
     async getData() {
       // console.log(this.queryInfo)
-      const { data: res } = await this.$http.get('carpart/list', {
+      const { data: res } = await this.$http.get('worker/list', {
         params: this.queryInfo
       })
       console.log(res.data)
@@ -81,11 +80,10 @@ export default {
       this.tableData = []
       for (var idx in table) {
         this.tableData.push({
-          carpartId: table[idx].carpartId,
-          carpart_name: table[idx].carpartName,
-          manu: table[idx].manufacturer,
-          carpart_price: table[idx].carpartPrice,
-          reserve_amount: table[idx].reserveAmount
+          mechanicId: table[idx].mechanicId,
+          mechanicName: table[idx].mechanicName,
+          mechanicLv: table[idx].mechanicLv,
+          mechanicPhone: table[idx].mechanicPhone,
         })
       }
       this.total = res.data.total

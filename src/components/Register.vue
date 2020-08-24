@@ -67,7 +67,7 @@ export default {
       this.$refs.inputformRef.validate(async valid => {
         if (!valid) return this.$message.error('格式错误')
         const {data: res} = await this.$http.post(
-                'register',
+                'carregister',
                 JSON.stringify(this.input_form),
                 {
                   headers: {

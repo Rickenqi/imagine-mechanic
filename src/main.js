@@ -13,7 +13,7 @@ axios.defaults.baseURL = '/api'
 axios.defaults.withCredentials = true
 // 请求拦截，添加授权信息
 axios.interceptors.request.use(config => {
-  if (config.url !== '/aaa/ISBN') {
+  if (config.url !== '/login') {
     config.headers.Authorization = window.sessionStorage.getItem('token')
   }
   console.log(config)

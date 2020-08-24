@@ -1,45 +1,49 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-// import Login from '@/views/index.vue'
-// import Dashboard from '@/components/Sidebar.vue'
-
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Login from '@/views/index.vue';
+import Dashboard from '@/components/Sidebar.vue';
+import Carpart from "@/components/Carpart";
+import Carpart_manage from "@/components/Carpart_manage";
+import mechanic_manage from "@/components/mechanic_manage";
+import Register from "@/components/Register";
+import Repair from "@/components/Repair";
+import Usage from "@/components/Usage";
+import Bill from "@/components/Bill"
+import Mechanic from "@/components/Mechanic";
 Vue.use(VueRouter)
 
 const routes = [
-    // { path: '/', redirect: '/login' },
-    // { path: '/login', component: Login },
-    // {
-    //     path: '/dashboard',
-    //     component: Dashboard,
-    //     children: [{
-    //         path: '/Book_Manage',
-    //         component: BookManage
-    //     }, {
-    //         path: '/List_manage',
-    //         component: ListManage
-    //     }, {
-    //         path: '/borrow',
-    //         component: Borrow
-    //     }, {
-    //         path: '/return',
-    //         component: Return
-    //     }, {
-    //         path: '/reserve',
-    //         component: Reserve
-    //     }, {
-    //         path: '/rent_info',
-    //         component: RentInfo
-    //     }, {
-    //         path: '/book',
-    //         component: Book
-    //     }, {
-    //         path: '/book/:id',
-    //         component: BookInfo
-    //     }, {
-    //         path: '/book/:id/:list_id',
-    //         component: ListInfo
-    //     }]
-    // }
+    { path: '/', redirect: '/login' },
+    { path: '/login', component: Login },
+    {
+        path: '/dashboard',
+        component: Dashboard,
+        children: [{
+            path: "/carpart",
+            component: Carpart
+        }, {
+            path: '/carpart_manage',
+            component: Carpart_manage
+        }, {
+            path: '/mechanic_manage',
+            component: mechanic_manage
+        }, {
+            path: '/mechanic',
+            component: Mechanic
+        }, {
+            path: '/register',
+            component: Register
+        }, {
+            path: '/repair',
+            component: Repair
+        }, {
+            path: '/usage',
+            component: Usage
+        }, {
+            path: '/bill',
+            component: Bill
+        }]
+    }
 ]
 
 const router = new VueRouter({

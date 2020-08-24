@@ -9,14 +9,24 @@
       <el-form :model="input_form" :rules="rules" ref="inputformRef">
         <p>零件号：</p>
         <el-form-item prop="carpartId">
-          <el-input v-model="input_form.carpartId" placeholder="图书ID"></el-input>
+          <el-input v-model="input_form.carpartId" placeholder="零件号"></el-input>
         </el-form-item>
         <p>数量：</p>
         <el-form-item prop="usage_amount">
-          <el-input v-model="input_form.usage_amount" placeholder="读者ID"></el-input>
+          <el-input v-model="input_form.usage_amount" placeholder="数量"></el-input>
         </el-form-item>
         <el-button type="primary" @click="inputSubmit()" class="inputbtn">提交</el-button>
       </el-form>
+    </el-card>
+    <el-card class="box-card-1">
+      <h2 class="box-title">修理详情</h2>
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column type="index"></el-table-column>
+        <el-table-column prop="registerId" label="登记单号"></el-table-column>
+        <el-table-column prop="repairId" label="修理单号"></el-table-column>
+        <el-table-column prop="repairTask" label="修理项目"></el-table-column>
+        <el-table-column prop="carpartId" label="零件号"></el-table-column>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -25,6 +35,10 @@
 export default {
   data() {
     return {
+      queryInfo: {
+        workerId: window.sessionStorage.getItem('user_id')
+      },
+      tableData: [],
       input_form: {
         carpartId: '',
         usage_amount: ''
@@ -35,7 +49,26 @@ export default {
       }
     }
   },
+  created: function() {
+    this.getData()
+  },
   methods: {
+    async getData() {
+      const { data: res } = await this.$http.get('carrepair', {
+        params: this.queryInfo
+      })
+      console.log(res.data.list)
+      this.tableData = []
+      for (var idx in res.data.list) {
+        var cur = res.data.list[idx]
+        this.tableData.push({
+          registerId: cur.registerId,
+          repairId: cur.repairId,
+          repairTask: cur.repairTask,
+          carpartId: cur.carpartId
+        })
+      }
+    },
     clearInput() {
       this.input_form = {
         carpartId: '',
